@@ -4,19 +4,21 @@ import axios from 'axios';
 
 import { setCurrentSummoner } from '../../redux/summoner/summoner.actions';
 
+import './search-bar.styles.scss';
+
 //Get summoner name and info by search
 const SearchBar = ({ setCurrentSummoner }) => {
 
-    const [ smnName, setSmnName ] = useState('');
+    const [ searchName, setSearchName ] = useState('');
 
     const onChange = event => {
-        setSmnName(event.target.value);
+        setSearchName(event.target.value.replaceAll(' ', '%20'));
     }
 
     const onSubmit = event => {
         event.preventDefault();
         axios
-            .get(`http://localhost:5000/summoner/${smnName.replaceAll(' ', '%20')}`)
+            .get(`http://localhost:5000/summoner/${searchName}`)
             .then(response => setCurrentSummoner(response.data))
             .catch(error => console.log(error))
     }
@@ -24,7 +26,7 @@ const SearchBar = ({ setCurrentSummoner }) => {
     return(
         <div className=''>
             <form onSubmit={onSubmit}>
-                <input name='summoner' onChange={onChange}/>
+                <input onChange={onChange}/>
                 <button type='submit'>GO</button>
             </form>
         </div>

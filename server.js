@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const compression = require('compression');
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
+const { send } = require('process');
 
 //process.env.STRIPE_SECRET_KEY
 if(process.env.NODE_ENV !== 'production') require('dotenv').config();
@@ -25,6 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/summoner/:name', (req, res) => {
     const url = `https://oc1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.params.name}?api_key=${process.env.API_KEY}`;
     fetch(url).then(response => response.json()).then(jsonRes => res.send(jsonRes));
+})
+
+app.get('/free-rotation', (req, res) => {
+    res.send('haha')
 })
 
 const port = process.env.PORT || 5000;
