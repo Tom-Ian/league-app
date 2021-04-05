@@ -4,16 +4,21 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 import summonerReducer from './summoner/summoner.reducer';
+import freeRotationReducer from './free-rotation/free-rotation.reducer';
+import patchReducer from './patch/patch.reducer';
+import championReducer from './champion/champion.reducer';
 
 const persistConfig = {
     key: 'root',
     storage,
-    //the reducers we wanna store
-    whitelist: ['summoner']
+    whitelist: ['summoner', 'patch', 'champion']
 }
 
 const rootReducer = combineReducers({
-    summoner: summonerReducer
+    summoner: summonerReducer,
+    freeRotation: freeRotationReducer,
+    patch: patchReducer,
+    champion: championReducer
 })
 
 export default persistReducer(persistConfig, rootReducer);

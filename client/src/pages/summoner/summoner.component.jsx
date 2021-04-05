@@ -13,9 +13,9 @@ const SummonerPage = ({ currentSummoner }) => (
     
 )
 
-const mapDispatchToProps = (state) => {
+const mapStateToProps = (state) => {
     const { summoner } = state;
     return { currentSummoner: summoner.currentSummoner }
 }
 
-export default connect(mapDispatchToProps)(SummonerPage);
+export default connect(mapStateToProps)(SummonerPage);

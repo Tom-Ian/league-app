@@ -1,0 +1,27 @@
+.speech-bubble {
+	position: absolute;
+	background: #222222;
+	border-radius: .4em;
+	width: 350px;
+	transform: translateX(-(175px - 33px));
+	color: rgba(255, 255, 255, 0.527);
+	padding-left: 10px;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 10px solid transparent;
+	border-bottom-color: #383838;
+	border-top: 0;
+	margin-left: -10px;
+	margin-top: -10px;
+}
+
+.spell-name {
+	
+}

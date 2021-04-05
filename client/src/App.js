@@ -1,28 +1,40 @@
-import React from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Header from './components/header/header.component';
-import SearchBar from '../src/components/search-bar/search-bar.component';
-import './App.css';
-
+import HomePage from './pages/home-page/home-page.component';
 import SummonerPage from './pages/summoner/summoner.component';
+import ChampionPage from './pages/champion/champion.component';
 
-const App = ({ currentSummoner }) => {
+import { setPatch } from './redux/patch/patch.actions';
+import axios from 'axios';
+
+
+const App = ({ setPatch }) => {
+  
+  
+
+  useEffect(() => {
+    fetch('https://ddragon.leagueoflegends.com/api/versions.json')
+    .then(response => response.json())
+    .then(response => setPatch(response[1]));
+  }, [setPatch])
+  
   return (
     <div>
       <Header />
       <Switch>
-        <Route exact path='/' render={ () => currentSummoner ? (<Redirect to='/summoner'/>) : (<SearchBar />)} />
+        <Route exact path='/' component={HomePage} />
         <Route path='/summoner' component={SummonerPage}/>
+        <Route exact path='/champion/:championKey' component={ChampionPage} />
       </Switch>
     </div>
   );
 }
 
-const mapStateToProps = (state) => {
-  const { summoner } = state;
-  return { currentSummoner: summoner.currentSummoner }
-}
+const mapDispatchToProps = dispatch => ({
+  setPatch: patch => dispatch(setPatch(patch))
+})
 
-export default connect(mapStateToProps)(App);
+export default connect(null, mapDispatchToProps)(App);
