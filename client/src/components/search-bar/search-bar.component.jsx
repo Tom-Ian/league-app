@@ -1,40 +1,46 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import {  withRouter } from 'react-router-dom';
 
-import { setCurrentSummoner } from '../../redux/summoner/summoner.actions';
+import { fetchCurrentSummonerStartAsync } from '../../redux/summoner/summoner.actions';
 
 import './search-bar.styles.scss';
 
 //Get summoner name and info by search
-const SearchBar = ({ setCurrentSummoner }) => {
+const SearchBar = ({ history }) => {
 
-    const [ searchName, setSearchName ] = useState('');
+    const [ urlDisplayName, setUrlDisplayName ] = useState('');
+
+    // input showing: 'summoner name'
+    const [ placeholder, setPlaceholder ] = useState('summoner name');
 
     const onChange = event => {
-        setSearchName(event.target.value.replaceAll(' ', '%20'));
+        //replace ' ' with '+', still works in api as '%20'
+        setUrlDisplayName(event.target.value.replaceAll('%', '&#37').replaceAll(' ', '+'));
     }
 
     const onSubmit = event => {
         event.preventDefault();
-        axios
-            .get(`http://localhost:5000/summoner/${searchName}`)
-            .then(response => setCurrentSummoner(response.data))
-            .catch(error => console.log(error))
+        history.push(`/summoner/${urlDisplayName}`);
     }
 
     return(
-        <div className=''>
+        <div className='search-bar-container'>
             <form onSubmit={onSubmit}>
-                <input onChange={onChange}/>
-                <button type='submit'>GO</button>
+                <input 
+                    onChange={onChange} 
+                    placeholder={placeholder} 
+                    onFocus={() => setPlaceholder('')} 
+                    onBlur={() => setPlaceholder('summoner name')}
+                />
+                <button type='submit' className='button'>GO</button>
             </form>
         </div>
     )
 }
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentSummoner: summoner => dispatch(setCurrentSummoner(summoner))
+    fetchCurrentSummonerStartAsync: searchName => dispatch(fetchCurrentSummonerStartAsync(searchName))
 });
 
-export default connect(null, mapDispatchToProps)(SearchBar);
+export default withRouter(connect(null, mapDispatchToProps)(SearchBar));

@@ -2,5 +2,12 @@
     height: 70px;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    background-color: bisque;
+    .logo{
+        width: 80px;
+        height: 60px;
+    }
+
 }
+

@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Patua+One&display=swap');
+
+.match-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding: 10px 0 10px 0;
+
+    font-size: 10px;
+    .result-container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin-left: 10px;
+        width: 80px;
+        .result{
+            font-family: 'Patua One';
+            font-size: 13px;
+        }
+
+        .blue{
+            color:rgb(0, 183, 255);
+        }
+
+        .red{
+            color: red;
+        }
+
+        .summoner-spells-container{
+            display:flex;
+            flex-direction: row;
+        }
+    }
+
+    .items-scores-container{
+        display:flex;
+        align-items: flex-start;
+        flex-direction: column;
+        margin-right: 15px;
+
+        .items-container{
+            display: flex;
+            flex-direction: row;
+        }
+
+        .scores-container{
+            display: grid;
+            grid-template-columns: 50% 25% 25%;
+            width: 100%;
+            font-size: 13px;
+            
+        }
+    }
+
+    .time-container{
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

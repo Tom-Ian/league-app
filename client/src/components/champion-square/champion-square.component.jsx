@@ -1,14 +1,13 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
-import { setCurrentChampion } from '../../redux/champion/champion.actions';
+import { setCurrentChampion } from '../../redux/ddragon/ddragon.actions';
 
 import './champion-square.styles.scss';
 
-const ChampionSquare = ({ patch, championKey, setCurrentChampion }) => 
+const ChampionSquare = ({ patch, championKey, setCurrentChampion, type, level }) => 
 {
-
     const onClick = async () => {
         axios.get(`http://localhost:5000/champion`,{
             params: {
@@ -21,17 +20,39 @@ const ChampionSquare = ({ patch, championKey, setCurrentChampion }) =>
     }
 
     return(
-        <Link to={ `/champion/${championKey}`} onClick={onClick}>
-            <img 
-                className='champion-square' 
-                src={`https://cdn.communitydragon.org/${patch}/champion/${championKey}/square`}
-                alt='icon'
-            />
-        </Link>
-)}
+        <div className={`champion-square-container `}>
+            {
+                level ? 
+                <React.Fragment>
+                    <div className={`frame round`}>
+                        <img 
+                            src={`https://cdn.communitydragon.org/${patch}/champion/${championKey}/square`}
+                            alt={championKey}
+                        />
+                    </div>
+                    <span className='level round'>{level}</span>
+                </React.Fragment>
+                : 
+                <Link className='link-container' to={ `/champion/${championKey}`} onClick={onClick}>
+                    <img 
+                        src={`https://cdn.communitydragon.org/${patch}/champion/${championKey}/square`}
+                        alt={championKey}
+                    />
+                </Link>
+            }
+        
+        </div>
+
+    )
+}
+
+const mapStateToProps = state => {
+    const { patch } = state;
+    return { patch: patch.currentPatch}
+}
 
 const mapDispatchToProps = dispatch => ({
     setCurrentChampion: champion => dispatch(setCurrentChampion(champion))
 })
 
-export default connect(null, mapDispatchToProps)(withRouter(ChampionSquare));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ChampionSquare));

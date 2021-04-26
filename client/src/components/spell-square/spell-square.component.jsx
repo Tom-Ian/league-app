@@ -17,7 +17,7 @@ const SpellSquare = ({ patch, championKey, id }) => {
                 onMouseEnter={() => setOnHover(true)}
                 onMouseLeave={() => setOnHover(false)}
             />
-            { id != 'p' ?  <span className='key'>{id.toUpperCase()}</span> : ''}
+            { id !== 'p' ?  <span className='key'>{id.toUpperCase()}</span> : ''}
             { onHover ? <SpellBubble className='spell-bubble' id={id}/> : ''}
         </div>
 

@@ -6,7 +6,7 @@ import storage from 'redux-persist/lib/storage';
 import summonerReducer from './summoner/summoner.reducer';
 import freeRotationReducer from './free-rotation/free-rotation.reducer';
 import patchReducer from './patch/patch.reducer';
-import championReducer from './champion/champion.reducer';
+import ddragonReducer from './ddragon/ddragon.reducer';
 
 const persistConfig = {
     key: 'root',
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
     summoner: summonerReducer,
     freeRotation: freeRotationReducer,
     patch: patchReducer,
-    champion: championReducer
+    ddragon: ddragonReducer
 })
 
 export default persistReducer(persistConfig, rootReducer);

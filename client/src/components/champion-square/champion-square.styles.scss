@@ -1,4 +1,50 @@
-.champion-square {
-     height: 50px;
-     width: 50px;
+.champion-square-container{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     position: relative;
+
+     .frame{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          position: relative;  
+          overflow: hidden;
+          height: 50px;
+          width: 50px;
+          border: 1px solid rgb(255, 239, 11);
+     }
+
+     img {
+          height: 55px;
+          width: 55px;
+     }
+
+     .level {
+          position: absolute;
+          right: 0px;
+          bottom: 0px;
+          text-decoration: none;
+          background-color: black;
+          color: white;
+          height: 15px;
+          width: 15px;
+          font-size: 11px;
+          text-align: center;
+          border: 1px solid rgb(255, 239, 11);
+     }
 }
+
+.link-container{
+     display: flex;
+     justify-content: center;
+     align-items: center; 
+     position: relative;
+
+
+}
+
+.round{
+     border-radius: 50%;
+}
+

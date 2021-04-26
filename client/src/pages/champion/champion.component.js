@@ -13,8 +13,10 @@ const ChampionPage = ({ match, currentPatch }) => {
 
     return(
         <div className='champion-page-container'>
-            <ChampionSquare championKey={championKey} patch={currentPatch}/>
-            <SpellBar patch={currentPatch} championKey={championKey} />
+            <div className='champion-header'>
+                <ChampionSquare championKey={championKey} patch={currentPatch}/>
+                <SpellBar patch={currentPatch} championKey={championKey} />
+            </div>
         </div>
 )}
 

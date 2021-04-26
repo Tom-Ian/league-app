@@ -1,0 +1,7 @@
+const MatchActionTypes = {
+    FETCH_MATCH_START: 'FETCH_MATCH_START',
+    FETCH_MATCH_SUCCESS: 'FETCH_MATCH_SUCCESS',
+    FETCH_MATCH_FAILURE: 'FETCH_MATCH_FAILURE'
+}
+
+export default MatchActionTypes;

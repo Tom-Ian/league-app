@@ -8,6 +8,8 @@ const SpellBubble = ({ id, currentChampion }) =>{
     const [spellName, setSpellName] = useState('');
     const [description, setDescription] = useState('');
 
+    var spellIndex;
+
     useEffect(() => {
         setSpell();
     })
@@ -20,7 +22,6 @@ const SpellBubble = ({ id, currentChampion }) =>{
             setDescription(currentChampion.passive.description)
         } else{
             //spells             
-            var spellIndex;
             switch (id) {
                 case 'q': spellIndex = 0;
                 break;
@@ -29,6 +30,9 @@ const SpellBubble = ({ id, currentChampion }) =>{
                 case 'e': spellIndex = 2;
                 break;
                 case 'r': spellIndex = 3;
+                break;
+                default: 
+                return
             }
             setSpellName(currentChampion.spells[spellIndex].name)
             setDescription(refineDescription(currentChampion.spells[spellIndex].dynamicDescription))
@@ -37,17 +41,42 @@ const SpellBubble = ({ id, currentChampion }) =>{
 
     
 
-    const refineDescription = (description) => {
-        var refinedDescription;
-        refinedDescription = description
+    const refineDescription = (dynamicDescription) => {
+
+        //Out put format: 1/1/1/1/1
+        var effect1 = stringifyArray(currentChampion.spells[spellIndex].effectAmounts.Effect1Amount);
+        var effect2 = stringifyArray(currentChampion.spells[spellIndex].effectAmounts.Effect2Amount);
+
+        var refinedDescription = dynamicDescription
             .replace('<magicDamage>', '<font color=#0099ff>')
             .replace('</magicDamage>', "</font>")
             .replace('<physicalDamage>', '<font color=#ffcc00>')
-            .replace('</physicalDamage', '</font>')
+            .replace('</physicalDamage>', '</font>')
             .replace('<keywordMajor>', '<font color=#ffffff>')
             .replace('</keywordMajor>','</font>')
+            .replace('<status>','<font color=red>')
+            .replace('</status>','</font>')
+
+        if(refinedDescription.includes(''))
+            refinedDescription
+            .replace('@TotalDamageTooltip@', effect2)
+            .replace('@TotalDamage@', effect1)
 
         return refinedDescription;
+    }
+
+    const stringifyArray = (array) => {
+        
+        var result = '';
+        
+        for(var i = 0; i < 5; i++){
+            if(i !== 4)
+                result += `${array[i]}/`
+            else
+                result += `${array[i]}`
+        }
+
+        return result;
     }
 
     function parser() {
@@ -63,8 +92,8 @@ const SpellBubble = ({ id, currentChampion }) =>{
 }
 
 const mapStateToProps = state => {
-    const { champion } = state;
-    return { currentChampion: champion.currentChampion };
+    const { ddragon } = state;
+    return { currentChampion: ddragon.currentChampion };
 }
 
 export default connect(mapStateToProps)(SpellBubble);
