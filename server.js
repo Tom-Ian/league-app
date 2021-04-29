@@ -25,6 +25,15 @@ app.use((req, res, next) => {
     next();
 });
 
+
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, 'client/build')));
+
+    app.get('*', function(req, res) {
+        res.sendFile(path.join(__dirname, 'client/build', 'index.html'))
+    });
+}
+
 app.get('/summoner/:searchName', (req, res) => {
     const url = `https://oc1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.params.searchName}?api_key=${process.env.API_KEY}`;
     fetch(url).then(response => response.json()).then(response => {
