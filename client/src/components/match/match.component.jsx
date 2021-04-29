@@ -8,9 +8,8 @@ import SummonerSpell from '../summoner-spell/summoner-spell.component';
 
 import './match.styles.scss';
 
-const Match = ({matchId, championKey, patch, summonerSpells}) => {
+const Match = ({matchId, championKey, summonerSpells}) => {
 
-    const [currPtcp, setCurrPtcp] = useState({});
     const [minute, setMinute] = useState('');
     const [second, setSecond] = useState('');
     const [daysAgo, setDaysAgo] = useState('');
@@ -57,7 +56,6 @@ const Match = ({matchId, championKey, patch, summonerSpells}) => {
                 const currPtcp = data.participants.filter(participant => participant.championId === championKey)[0]
                 const { stats } = currPtcp;
                 console.log('currptcp', currPtcp)
-                setCurrPtcp(currPtcp);
                 setKda({kills: stats.kills, deaths: stats.deaths, assists: stats.assists});
                 setResult(currPtcp.stats.win ? 'VICTORY' : 'DEFEAT');
                 setItems([
@@ -126,10 +124,8 @@ const Match = ({matchId, championKey, patch, summonerSpells}) => {
 }
 
 const mapStateToProps = state => {
-    const { patch } = state;
     const { ddragon } = state
     return { 
-        patch: patch.currentPatch,
         summonerSpells: ddragon.summonerSpells 
     }
 }

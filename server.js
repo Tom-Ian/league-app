@@ -10,7 +10,9 @@ const app = express();
 
 const port = process.env.PORT || 5000;
 
-const key = process.env.NODE_ENV === 'production' ? process.env.API_KEY_PRODUCTION : process.env.API_KEY_DEVELOPMENT;
+const key = 'RGAPI-fd271dc1-ab43-4b84-91eb-bf7d3cfcb88b';
+
+//const key = process.env.NODE_ENV === 'production' ? process.env.API_KEY_PRODUCTION : process.env.API_KEY_DEVELOPMENT;
 
 app.listen(port, error => {
     if (error) throw error;
