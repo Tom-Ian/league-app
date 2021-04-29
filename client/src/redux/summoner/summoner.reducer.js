@@ -2,10 +2,7 @@ import SummonerActionTypes from './summoner.types';
 
 const INITIAL_STATE = {
     currentSummoner: null,
-    recentAram: {
-        overview: null, 
-        details: null
-    },
+    recentAram: null,
     isFetchingCurrentSummoner: false,
     isFetchingRecentAram: false,
     errorFetchingSummoner: undefined,

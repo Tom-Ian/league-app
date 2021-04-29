@@ -38,7 +38,9 @@ export const fetchCurrentSummonerStartAsync = searchName => {
         //fetch current summoner start
         dispatch(fetchCurrentSummonerStart());
         axios
-            .get(`http://localhost:5000/summoner/${searchName}`)
+            .get('/summoner', {
+                params: { searchName }
+            })
             .then(response => {
                 dispatch(fetchCurrentSummonerSuccess(response.data));
                 //fetch aram
@@ -52,7 +54,7 @@ export const fetchRecentAramStartAsync = accountId => {
     return dispatch => {
         dispatch(fetchRecentAramStart());
         axios
-        .get(`http://localhost:5000/aram`, {
+        .get('/aram', {
             params: { accountId }
         })
         .then(response => {

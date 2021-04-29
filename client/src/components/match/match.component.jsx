@@ -30,7 +30,7 @@ const Match = ({matchId, championKey, patch, summonerSpells}) => {
         //fetch match info
         async function fetchMatch() {
             const response = await axios
-                .get('http://localhost:5000/match', {
+                .get('/match', {
                     params: {
                         matchId
                     }

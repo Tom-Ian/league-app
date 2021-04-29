@@ -34,8 +34,9 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-app.get('/summoner/:searchName', (req, res) => {
-    const url = `https://oc1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.params.searchName}?api_key=${process.env.API_KEY}`;
+app.get('/summoner', (req, res) => {
+    const url = `https://oc1.api.riotgames.com/lol/summoner/v4/summoners/by-name/${req.query.searchName}?api_key=${process.env.API_KEY}`;
+
     fetch(url).then(response => response.json()).then(response => {
         if(!response.status)
             res.send(response);

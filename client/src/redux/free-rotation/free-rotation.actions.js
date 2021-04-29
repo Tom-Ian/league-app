@@ -18,7 +18,7 @@ export const fetchFreeRotationStartAsync = () => {
     return dispatch => {
         dispatch(fetchFreeRotaionStart());
         axios
-            .get('http://localhost:5000/free-rotation')
+            .get('free-rotation')
             .then(response => dispatch(fetchFreeRotationSuccess(response.data.freeChampionIds)))
             .catch(errorMessage => dispatch(fetchFreeRotationFailure(errorMessage)))
     }

@@ -18,8 +18,9 @@ const App = ({ setPatch, setSummonerSpells }) => {
     fetch('https://ddragon.leagueoflegends.com/api/versions.json')
     .then(response => response.json())
     .then(response => {
-      setPatch(response[0]);
-      fetch(`https://ddragon.leagueoflegends.com/cdn/${response[0]}/data/en_US/summoner.json`)
+      const patch = response[1]
+      setPatch(patch);
+      fetch(`https://ddragon.leagueoflegends.com/cdn/${patch}/data/en_US/summoner.json`)
       .then(response => response.json())
       .then(response => setSummonerSpells(response.data))
     });

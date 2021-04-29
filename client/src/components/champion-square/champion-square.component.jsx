@@ -9,7 +9,7 @@ import './champion-square.styles.scss';
 const ChampionSquare = ({ patch, championKey, setCurrentChampion, type, level }) => 
 {
     const onClick = async () => {
-        axios.get(`http://localhost:5000/champion`,{
+        axios.get(`champion`,{
             params: {
                 patch: patch,
                 championKey: championKey
